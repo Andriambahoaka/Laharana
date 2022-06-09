@@ -20,8 +20,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_add_contact"
-        app:menu="@menu/activity_main_drawer" >
+
+         >
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idListe"
         android:layout_width="match_parent"
@@ -31,3 +31,4 @@
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
+    <!--app:headerLayout="@layout/nav_header_add_contact-->
