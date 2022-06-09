@@ -13,17 +13,30 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.mahery.evaluation.databinding.ActivityAddContactBinding;
+
+import java.util.ArrayList;
 
 public class AddContact extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityAddContactBinding binding;
+    private RecyclerView contactRV;
+
+    // Arraylist for storing data
+    private ArrayList<Contact> contactList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//////////////////////////////
+
+
+
+
 
         binding = ActivityAddContactBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -47,6 +60,20 @@ public class AddContact extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_add_contact);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        // contactRV = findViewById(R.id.idListe);
+        contactList = new ArrayList<>();
+        contactList.add(new Contact("Tsiry Andria","0331240052",R.drawable.profil));
+        contactList.add(new Contact("Naly Rakoto","0331240042",R.drawable.profil));
+
+
+        ContactAdapter carteAdapter= new ContactAdapter(this,contactList);
+        // GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        contactRV = (RecyclerView) findViewById(R.id.idListe);
+        // in below two lines we are setting layoutmanager and adapter to our recycler view.
+        contactRV.setLayoutManager(mLayoutManager);
+        contactRV.setAdapter(carteAdapter);
     }
 
     @Override
