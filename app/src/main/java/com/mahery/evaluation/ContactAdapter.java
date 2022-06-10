@@ -37,7 +37,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.Viewhold
         Contact model = contactList.get(position);
         holder.nom.setText(model.getNom());
         holder.numero.setText(model.getNumero());
-        holder.image.setImageResource(model.getImage());
+        //holder.image.setImageResource(model.getImage());
     }
 
     @Override
