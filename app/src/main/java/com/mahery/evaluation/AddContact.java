@@ -37,6 +37,7 @@ public class AddContact extends AppCompatActivity {
 
     // Arraylist for storing data
     private ArrayList<Contact> contactList;
+    ContactAdapter contactAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class AddContact extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
@@ -79,7 +81,13 @@ public class AddContact extends AppCompatActivity {
         numeroEdt = findViewById(R.id.numero);
         //imageEdt = findViewById(R.id.image);
         addContactBtn = findViewById(R.id.enregistrer);
-
+        contactAdapter= new ContactAdapter(this,contactList);
+        // GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        contactRV = (RecyclerView) findViewById(R.id.idListe);
+        // in below two lines we are setting layoutmanager and adapter to our recycler view.
+        contactRV.setLayoutManager(mLayoutManager);
+        contactRV.setAdapter(contactAdapter);
 
 
 
@@ -99,18 +107,15 @@ public class AddContact extends AppCompatActivity {
                     Toast.makeText(AddContact.this, "Please enter all the data..", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                contactList = dbHandler.findAllContact();
+
 
                 // on below line we are calling a method to add new
                 // course to sqlite data and pass all our values to it.
                 dbHandler.addNewContact(nom,numero, "4");
-                ContactAdapter carteAdapter= new ContactAdapter(AddContact.this,contactList);
-                // GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
-                LinearLayoutManager mLayoutManager = new LinearLayoutManager(AddContact.this, LinearLayoutManager.VERTICAL, false);
-                contactRV = (RecyclerView) findViewById(R.id.idListe);
-                // in below two lines we are setting layoutmanager and adapter to our recycler view.
-                contactRV.setLayoutManager(mLayoutManager);
-                contactRV.setAdapter(carteAdapter);
+                contactList = dbHandler.findAllContact();
+                contactAdapter= new ContactAdapter(AddContact.this,contactList);
+                contactAdapter.notifyDataSetChanged();
+                contactRV.setAdapter(contactAdapter);
 
 
                 // after adding the data we are displaying a toast message.
@@ -121,13 +126,7 @@ public class AddContact extends AppCompatActivity {
             }
         });
 
-        ContactAdapter carteAdapter= new ContactAdapter(this,contactList);
-        // GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        contactRV = (RecyclerView) findViewById(R.id.idListe);
-        // in below two lines we are setting layoutmanager and adapter to our recycler view.
-        contactRV.setLayoutManager(mLayoutManager);
-        contactRV.setAdapter(carteAdapter);
+
     }
 
     @Override
