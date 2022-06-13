@@ -1,11 +1,13 @@
 package com.mahery.evaluation;
 
+import android.graphics.Bitmap;
+
 public class Contact {
     private String nom;
     private String numero;
-    private int image;
+    private Bitmap image;
 
-    public Contact(String nom, String numero, int image) {
+    public Contact(String nom, String numero, Bitmap image) {
         this.nom = nom;
         this.numero = numero;
         this.image = image;
@@ -27,11 +29,11 @@ public class Contact {
         this.numero = numero;
     }
 
-    public int getImage() {
+    public Bitmap getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(Bitmap image) {
         this.image = image;
     }
 }

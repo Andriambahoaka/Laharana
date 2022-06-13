@@ -5,7 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class DBHandler extends SQLiteOpenHelper {
@@ -50,7 +53,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + NAME_COL + " TEXT,"
                 + NUMERO_COL + " TEXT,"
-                + IMAGE_COL + " TEXT)";
+                + IMAGE_COL + " BLOB NOT NULL)";
 
         // at last we are calling a exec sql
         // method to execute above sql query
@@ -58,7 +61,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // this method is use to add new course to our sqlite database.
-    public void addNewContact(String nom, String numero, String image) {
+    public void addNewContact(String nom, String numero, byte[] image) {
 
         // on below line we are creating a variable for
         // our sqlite database and calling writable method
@@ -102,7 +105,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 // on below line we are adding the data from cursor to our array list.
                 listeContact.add(new Contact(cursorContacts.getString(1),
                         cursorContacts.getString(2),
-                        cursorContacts.getInt(3)
+                        convertByteArrayToBitmap(cursorContacts.getBlob(3))
                         ));
             } while (cursorContacts.moveToNext());
             // moving our cursor to next.
@@ -120,4 +123,9 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
+    public  Bitmap convertByteArrayToBitmap(byte[] bytes) {
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    }
+
+
 }

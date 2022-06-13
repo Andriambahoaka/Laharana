@@ -12,49 +12,80 @@
         android:layout_width="269dp"
         android:layout_height="46dp"
         android:text="Nom ..."
-        tools:layout_editor_absoluteX="60dp"
-        tools:layout_editor_absoluteY="588dp" />
+        tools:layout_editor_absoluteX="71dp"
+        tools:layout_editor_absoluteY="631dp" />
 
     <EditText
         android:id="@+id/nom"
-        android:layout_width="269dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="64dp"
-        android:text="Nom ..."
+        android:layout_width="350dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/et_custom"
+        android:hint="Nom"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image" />
 
+
     <EditText
         android:id="@+id/numero"
-        android:layout_width="265dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="64dp"
+        android:layout_width="219dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="156dp"
         android:layout_marginTop="56dp"
-        android:text="Numero.."
+        android:background="@drawable/et_custom"
+        android:hint="Numero"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/enregistrer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nom"
-        app:layout_constraintVertical_bias="0.037" />
+        app:layout_constraintVertical_bias="0.067" />
+
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/countryP"
+        android:layout_width="130dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="24dp"
+        android:padding="6dp"
+        android:textSize="11sp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/et_custom"
+        app:layout_constraintBottom_toTopOf="@+id/enregistrer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nom"
+        app:layout_constraintVertical_bias="0.014" />
 
     <Button
         android:id="@+id/enregistrer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="54dp"
         android:layout_marginTop="184dp"
-        android:text="Sauver"
+        android:background="@drawable/button_shape"
+        android:text="Enregistrer"
+        android:textColor="@color/black"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.452"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nom" />
 
-    <Button
+
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="148dp"
-        android:text="Upload"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="88dp"
+        android:onClick="loadPhoto"
+        android:src="@drawable/portrait"
+        app:civ_border_color="#ffde69"
+        app:civ_border_width="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -4,6 +4,7 @@
     package="com.mahery.evaluation">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,12 +17,12 @@
         android:theme="@style/Theme.Evaluation"
         tools:targetApi="31">
         <activity
-            android:name=".AddContact"
+            android:name=".MainActivity"
             android:exported="false"
             android:label="@string/title_activity_add_contact"
             android:theme="@style/Theme.Evaluation.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".AddContact"
             android:exported="true"
             android:theme="@style/Theme.Evaluation.NoActionBar">
             <intent-filter>
