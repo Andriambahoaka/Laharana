@@ -9,11 +9,16 @@
 
     <TextView
         android:id="@+id/text_home"
-        android:layout_width="269dp"
-        android:layout_height="46dp"
-        android:text="Nom ..."
-        tools:layout_editor_absoluteX="71dp"
-        tools:layout_editor_absoluteY="631dp" />
+        android:layout_width="92dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginBottom="12dp"
+        android:text="Titre"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/image"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/nom"
@@ -67,6 +72,7 @@
         android:layout_marginTop="184dp"
         android:background="@drawable/button_shape"
         android:text="Enregistrer"
+        android:drawableLeft="@drawable/plus"
         android:textColor="@color/black"
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"

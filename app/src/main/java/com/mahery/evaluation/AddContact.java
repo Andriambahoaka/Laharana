@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -30,6 +32,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hbb20.CountryCodePicker;
 import com.mahery.evaluation.databinding.ActivityAddContactBinding;
+import com.yarolegovich.slidingrootnav.SlidingRootNav;
+import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -50,6 +54,8 @@ public class AddContact extends AppCompatActivity {
     private byte[] imageByte;
     private Button addContactBtn;
     private DBHandler dbHandler;
+    CountryCodePicker ccp;
+
 
 
     // Arraylist for storing data
@@ -58,14 +64,14 @@ public class AddContact extends AppCompatActivity {
 
     static int IMAGE_PICKING = 12;
     static int IMAGE_CAPTURE = 11;
-
-
-    CountryCodePicker ccp;
-
+    public SlidingRootNav slidingRootNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityAddContactBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        //////////////// Row Too big ///////////////////////////////
         try {
             Field field = CursorWindow.class.getDeclaredField("sCursorWindowSize");
             field.setAccessible(true);
@@ -73,10 +79,19 @@ public class AddContact extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//////////////////////////////
 
-        binding = ActivityAddContactBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+
+        //////////////////////////////// Initialisaton ////////////////////////
+        nomEdt = (EditText) findViewById(R.id.nom);
+        numeroEdt = (EditText) findViewById(R.id.numero);
+        imageEdt = findViewById(R.id.image);
+        addContactBtn = findViewById(R.id.enregistrer);
+        ccp = (CountryCodePicker) findViewById(R.id.countryP);
+
+
+
+
+
         // creating a new dbhandler class
         // and passing our context to it.
         dbHandler = new DBHandler(AddContact.this);
@@ -102,19 +117,28 @@ public class AddContact extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+
+       /* slidingRootNav=     new SlidingRootNavBuilder(this)
+                .withToolbarMenuToggle(binding.appBarAddContact.toolbar)
+                 .withMenuOpened(false)
+                .withMenuLayout(R.layout.app_bar_add_contact)
+                .inject();*/
+
+
+
+
+
+
+
+
+
+
         // contactRV = findViewById(R.id.idListe);
       /*  contactList = new ArrayList<>();
         contactList.add(new Contact("Tsiry Andria","0331240052",R.drawable.profil));
         contactList.add(new Contact("Naly Rakoto","0331240042",R.drawable.profil)); */
         contactList = dbHandler.findAllContact();
 
-        nomEdt = findViewById(R.id.nom);
-        numeroEdt = findViewById(R.id.numero);
-        imageEdt = findViewById(R.id.image);
-        addContactBtn = findViewById(R.id.enregistrer);
-        ccp = (CountryCodePicker) findViewById(R.id.countryP);
-
-       // numeroEdt.setText("+"+ccp.getSelectedCountryCode());
         ccp.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
             @Override
             public void onCountrySelected() {
@@ -131,7 +155,7 @@ public class AddContact extends AppCompatActivity {
 
 
 
-// below line is to add on click listener for our add course button.
+        // below line is to add on click listener for our add course button.
         addContactBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,15 +181,16 @@ public class AddContact extends AppCompatActivity {
                 contactAdapter= new ContactAdapter(AddContact.this,contactList);
                 contactAdapter.notifyDataSetChanged();
                 contactRV.setAdapter(contactAdapter);
-
-
                 // after adding the data we are displaying a toast message.
-                Toast.makeText(AddContact.this, "Course has been added.", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AddContact.this, "Course has been added.", Toast.LENGTH_SHORT).show();
                 nomEdt.setText("");
                 numeroEdt.setText("");
+                imageEdt.setImageDrawable(getResources().getDrawable(R.drawable.portrait));
 
             }
         });
+
+
 
 
     }
