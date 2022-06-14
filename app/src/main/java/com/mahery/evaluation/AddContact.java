@@ -120,16 +120,6 @@ public class AddContact extends AppCompatActivity {
                  .withMenuOpened(false)
                 .withMenuLayout(R.layout.app_bar_add_contact)
                 .inject();*/
-
-
-
-
-
-
-
-
-
-
         // contactRV = findViewById(R.id.idListe);
       /*  contactList = new ArrayList<>();
         contactList.add(new Contact("Tsiry Andria","0331240052",R.drawable.profil));
@@ -164,7 +154,7 @@ public class AddContact extends AppCompatActivity {
 
 
                 // validating if the text fields are empty or not.
-                if (nom.isEmpty() && numero.isEmpty()) {
+                if (nom.equalsIgnoreCase("") || numero.isEmpty()) {
                     Toast.makeText(AddContact.this, "Please enter all the data..", Toast.LENGTH_SHORT).show();
                     return;
                 }

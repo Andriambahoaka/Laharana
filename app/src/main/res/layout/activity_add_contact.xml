@@ -20,13 +20,23 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_add_contact"
+
 
          >
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/idListe"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <include layout="@layout/nav_header_add_contact"
+                android:id="@+id/my"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/idListe"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
     </com.google.android.material.navigation.NavigationView>
 
 

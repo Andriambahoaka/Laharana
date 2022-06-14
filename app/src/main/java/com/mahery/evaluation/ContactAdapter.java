@@ -1,6 +1,8 @@
 package com.mahery.evaluation;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,11 +41,25 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.Viewhold
         holder.nom.setText(model.getNom());
         holder.numero.setText(model.getNumero());
         holder.image.setImageBitmap(model.getImage());
-        Log.v("ATO NDRAY", String.valueOf(model.getId()));
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                  AddContact.supprimer(model.getId(), v.getContext());
+            }
+        });
+        holder.appel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", model.getNumero(), null));
+                context.startActivity(intent);
+            }
+        });
+
+        holder.appel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", model.getNumero(), null));
+                context.startActivity(intent);
             }
         });
     }
