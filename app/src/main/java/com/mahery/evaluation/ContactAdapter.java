@@ -1,6 +1,7 @@
 package com.mahery.evaluation;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,13 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.Viewhold
         holder.nom.setText(model.getNom());
         holder.numero.setText(model.getNumero());
         holder.image.setImageBitmap(model.getImage());
+        Log.v("ATO NDRAY", String.valueOf(model.getId()));
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 AddContact.supprimer(model.getId(), v.getContext());
+            }
+        });
     }
 
     @Override
@@ -50,7 +58,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.Viewhold
     // View holder class for initializing of
     // your views such as TextView and Imageview.
     public class Viewholder extends RecyclerView.ViewHolder {
-        private ImageView image;
+        private ImageView image,delete,message,appel;
         private TextView nom, numero;
 
         public Viewholder(@NonNull View itemView) {
@@ -58,6 +66,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.Viewhold
             image = itemView.findViewById(R.id.image);
             nom = itemView.findViewById(R.id.nom);
             numero = itemView.findViewById(R.id.numero);
+            delete=itemView.findViewById(R.id.suppimer);
+            message=itemView.findViewById(R.id.message);
+            appel=itemView.findViewById(R.id.appel);
         }
     }
 }

@@ -4,13 +4,13 @@
     <item
         android:id="@+id/action_couleur"
         android:orderInCategory="100"
-        android:icon="@drawable/color"
+        android:drawableLeft="@drawable/color"
         android:title="Changer couleur"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_langue"
         android:orderInCategory="100"
-        android:icon="@drawable/langue"
+        android:drawableLeft="@drawable/langue"
         android:title="Changer langue"
         app:showAsAction="never" />
 </menu>

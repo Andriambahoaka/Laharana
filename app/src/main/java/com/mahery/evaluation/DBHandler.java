@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -103,7 +104,8 @@ public class DBHandler extends SQLiteOpenHelper {
         if (cursorContacts.moveToFirst()) {
             do {
                 // on below line we are adding the data from cursor to our array list.
-                listeContact.add(new Contact(cursorContacts.getString(1),
+                Log.v("ETOOOOOOOOOOO", String.valueOf(cursorContacts.getInt(0)));
+                listeContact.add(new Contact(cursorContacts.getInt(0),cursorContacts.getString(1),
                         cursorContacts.getString(2),
                         convertByteArrayToBitmap(cursorContacts.getBlob(3))
                         ));
@@ -116,6 +118,13 @@ public class DBHandler extends SQLiteOpenHelper {
         return listeContact;
     }
 
+    public void deleteContact(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, ID_COL + " = ?",new String[]{Integer.toString(id)} );
+        db.close();
+
+
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

@@ -47,20 +47,20 @@ public class AddContact extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityAddContactBinding binding;
-    private RecyclerView contactRV;
+    private static RecyclerView contactRV;
 
     private EditText nomEdt, numeroEdt;
     private CircleImageView imageEdt;
     private byte[] imageByte;
     private Button addContactBtn;
-    private DBHandler dbHandler;
+    private static DBHandler dbHandler;
     CountryCodePicker ccp;
 
 
 
     // Arraylist for storing data
-    private ArrayList<Contact> contactList;
-    ContactAdapter contactAdapter;
+    private  static ArrayList<Contact> contactList;
+    private  static ContactAdapter  contactAdapter;
 
     static int IMAGE_PICKING = 12;
     static int IMAGE_CAPTURE = 11;
@@ -87,9 +87,6 @@ public class AddContact extends AppCompatActivity {
         imageEdt = findViewById(R.id.image);
         addContactBtn = findViewById(R.id.enregistrer);
         ccp = (CountryCodePicker) findViewById(R.id.countryP);
-
-
-
 
 
         // creating a new dbhandler class
@@ -177,10 +174,8 @@ public class AddContact extends AppCompatActivity {
                 // course to sqlite data and pass all our values to it.
 
                 dbHandler.addNewContact(nom,numero, imageByte);
-                contactList = dbHandler.findAllContact();
-                contactAdapter= new ContactAdapter(AddContact.this,contactList);
-                contactAdapter.notifyDataSetChanged();
-                contactRV.setAdapter(contactAdapter);
+                recharger(AddContact.this);
+
                 // after adding the data we are displaying a toast message.
                 //Toast.makeText(AddContact.this, "Course has been added.", Toast.LENGTH_SHORT).show();
                 nomEdt.setText("");
@@ -255,5 +250,17 @@ public class AddContact extends AppCompatActivity {
         byte[] byteArray = stream.toByteArray();
         bitmap.recycle();
         return byteArray;
+    }
+
+    public static void recharger(Context context){
+        contactList = dbHandler.findAllContact();
+        contactAdapter= new ContactAdapter(context,contactList);
+        contactAdapter.notifyDataSetChanged();
+        contactRV.setAdapter(contactAdapter);
+    }
+
+    public static void supprimer(int id,Context context){
+        dbHandler.deleteContact(id);
+        recharger(context);
     }
 }
